@@ -89,7 +89,6 @@ def attempt_count(blob, blob_id, counting_lines,speed_estimation_lines, counts,f
                     'id': blob_id,
                     'type': blob.type,
                     'counting_line': label,
-                    'position_first_detected': blob.position_first_detected,
                     'position_counted': blob.centroid,
                     'counted_at':time.time(),
                 },

@@ -1,5 +1,5 @@
-from .bounding_box import get_centroid, get_area
-
+from .bounding_box import get_centroid, get_area, get_position
+from distanceEstimation import distance_cal
 
 class Blob:
     '''
@@ -17,10 +17,17 @@ class Blob:
         self.lines_crossed = [] # list of counting lines crossed by a vehicle
         self.speed_estimation_line_crossed = []
         self.lines_crossed_frame = 1
-        self.position_first_detected = tuple(self.centroid)
-        self.centroid_crossed_line = (0,0)
+        # self.position_first_detected = tuple(self.centroid)
+        # self.centroid_crossed_line = (0,0)
         self.speed = 0
         self.onRoad = "A"
+        self.position = get_position(_bounding_box)
+        self.distance = distance_cal(self.position)
+        self.distanceInLast3Frame = []
+        self.distanceBetween3Frames = []
+        self.mean_distanceInLast3Frame= 0.0
+        self.remainingTime = 0.0
+        
         
     def update(self, _bounding_box, _type=None, _confidence=None, _tracker=None):
         self.bounding_box = _bounding_box
@@ -28,5 +35,8 @@ class Blob:
         self.type_confidence = _confidence if _confidence is not None else self.type_confidence
         self.centroid = get_centroid(_bounding_box)
         self.area = get_area(_bounding_box)
+        self.position = get_position(_bounding_box)
+        self.distance = distance_cal(self.position)
         if _tracker:
             self.tracker = _tracker
+    

@@ -51,7 +51,7 @@ def _remove_stray_blobs(blobs, matched_blob_ids, mcdf):
             del blobs[blob_id]
     return blobs
 
-def add_new_blobs(boxes, classes, confidences, blobs, frame, tracker, mcdf):
+def add_new_blobs(boxes, classes, confidences, blobs, frame, tracker, mcdf, BlobId):
     '''
     Add new blobs or updates existing ones.
     '''
@@ -84,7 +84,7 @@ def add_new_blobs(boxes, classes, confidences, blobs, frame, tracker, mcdf):
 
         if not match_found:
             _blob = Blob(box, _type, _confidence, _tracker)
-            blob_id = generate_vehicle_id()
+            blob_id = BlobId
             blobs[blob_id] = _blob
 
             blog_create_log_meta = {

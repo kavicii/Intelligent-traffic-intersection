@@ -14,11 +14,22 @@ try:
 except ValueError:
     print('Invalid value for IS_CAM. It should be either True or False.')
     ENVS_READY = False
+try:
+    IS_CAM_P = ast.literal_eval(os.getenv('IS_CAM_P', 'False'))
+except ValueError:
+    print('Invalid value for IS_CAM_P. It should be either True or False.')
+    ENVS_READY = False
 
 # Absolute/relative path to video or camera input
 # E.g "./data/videos/sample_traffic_scene.mp4" or 1
 if os.getenv('VIDEO'):
     VIDEO = int(os.getenv('VIDEO')) if IS_CAM else os.getenv('VIDEO')
+else:
+    print('Path to video or camera input not set.')
+    ENVS_READY = False
+
+if os.getenv('VIDEO_P'):
+    VIDEO_P = int(os.getenv('VIDEO_P')) if IS_CAM else os.getenv('VIDEO_P')
 else:
     print('Path to video or camera input not set.')
     ENVS_READY = False
@@ -33,11 +44,24 @@ except ValueError:
     print('Invalid value for USE_DROI. It should be either True or False.')
     ENVS_READY = False
 
+try:
+    USE_DROI_P = ast.literal_eval(os.getenv('USE_DROI_P', 'False'))
+except ValueError:
+    print('Invalid value for USE_DROI_P. It should be either True or False.')
+    ENVS_READY = False
+
 if USE_DROI:
     try:
         DROI = ast.literal_eval(os.getenv('DROI'))
     except ValueError:
         print('Invalid value for DROI. It should be a list of coordinates (2-tuples).')
+        ENVS_READY = False
+
+if USE_DROI_P:
+    try:
+        DROI_P = ast.literal_eval(os.getenv('DROI_P'))
+    except ValueError:
+        print('Invalid value for DROI_P. It should be a list of coordinates (2-tuples).')
         ENVS_READY = False
 
 # Display/overlay the detection ROI on the video
@@ -47,11 +71,23 @@ except ValueError:
     print('Invalid value for SHOW_DROI. It should be either True or False.')
     ENVS_READY = False
 
+try:
+    SHOW_DROI_P = ast.literal_eval(os.getenv('SHOW_DROI_P', 'False'))
+except ValueError:
+    print('Invalid value for SHOW_DROI_P. It should be either True or False.')
+    ENVS_READY = False
 # Display cumulative counts on the video
+
 try:
     SHOW_COUNTS = ast.literal_eval(os.getenv('SHOW_COUNTS', 'True'))
 except ValueError:
     print('Invalid value for SHOW_COUNTS. It should be either True or False.')
+    ENVS_READY = False
+
+try:
+    SHOW_COUNTS_P = ast.literal_eval(os.getenv('SHOW_COUNTS_P', 'True'))
+except ValueError:
+    print('Invalid value for SHOW_COUNTS_P. It should be either True or False.')
     ENVS_READY = False
 
 # Maximum consecutive detection failures i.e number of detection failures
@@ -78,9 +114,9 @@ except ValueError:
     print('Invalid value for DI. It should be a positive integer.')
     ENVS_READY = False
 
-# Model/algorithm to use for vehicle detection (options: yolo, tfoda, detectron2, haarcascade)
-DETECTOR = os.getenv('DETECTOR', 'tfoda')
-
+# Model/algorithm to use for vehicle/person detection
+DETECTOR = os.getenv('DETECTOR', 'yolo')
+DETECTOR_P = os.getenv('DETECTOR_P', 'yolo_p')
 # Algorithm to use for vehicle tracking (options: kcf, csrt)
 TRACKER = os.getenv('TRACKER', 'kcf')
 
@@ -115,6 +151,11 @@ else:
     print('Invalid value for COUNTING_LINES. It should be a list of lines.')
     ENVS_READY = False
 
+if os.getenv('COUNTING_LINES_P'):
+    COUNTING_LINES_P = ast.literal_eval(os.getenv('COUNTING_LINES_P'))
+else:
+    print('Invalid value for COUNTING_LINES_P. It should be a list of lines.')
+    ENVS_READY = False
 #Speed 
 if os.getenv('SPEED_ESTIMATION_LINES'):
     SPEED_ESTIMATION_LINES = ast.literal_eval(os.getenv('SPEED_ESTIMATION_LINES'))
@@ -168,9 +209,28 @@ if DETECTOR == 'yolo':
         YOLO_CLASSES_PATH = os.getenv('YOLO_CLASSES_PATH')
         YOLO_CLASSES_OF_INTEREST_PATH = os.getenv('YOLO_CLASSES_OF_INTEREST_PATH')
         YOLO_CONFIDENCE_THRESHOLD = float(os.getenv('YOLO_CONFIDENCE_THRESHOLD'))
+        print(str(YOLO_CLASSES_OF_INTEREST_PATH))
     else:
         print('YOLO_WEIGHTS_PATH, YOLO_CONFIG_PATH, YOLO_CLASSES_PATH, YOLO_CLASSES_OF_INTEREST_PATH, ' +
               'and/or YOLO_CONFIDENCE_THRESHOLD not set or invalid.')
+        ENVS_READY = False
+
+
+if DETECTOR_P == 'yolo_p':
+    if os.getenv('YOLO_P_WEIGHTS_PATH') and \
+            os.getenv('YOLO_P_CONFIG_PATH') and \
+            os.getenv('YOLO_P_CLASSES_PATH') and \
+            os.getenv('YOLO_P_CLASSES_OF_INTEREST_PATH') and \
+            os.getenv('YOLO_P_CONFIDENCE_THRESHOLD'):
+        YOLO_P_WEIGHTS_PATH = os.getenv('YOLO_P_WEIGHTS_PATH')
+        YOLO_P_CONFIG_PATH = os.getenv('YOLO_P_CONFIG_PATH')
+        YOLO_P_CLASSES_PATH = os.getenv('YOLO_P_CLASSES_PATH')
+        YOLO_P_CLASSES_OF_INTEREST_PATH = os.getenv('YOLO_P_CLASSES_OF_INTEREST_PATH')
+        YOLO_P_CONFIDENCE_THRESHOLD = float(os.getenv('YOLO_P_CONFIDENCE_THRESHOLD'))
+        print(str(YOLO_P_CLASSES_OF_INTEREST_PATH))
+    else:
+        print('YOLO_P_WEIGHTS_PATH, YOLO_P_CONFIG_PATH, YOLO_P_CLASSES_PATH, YOLO_P_CLASSES_OF_INTEREST_PATH, ' +
+              'and/or YOLO_P_CONFIDENCE_THRESHOLD not set or invalid.')
         ENVS_READY = False
 
 # Configs for Detectron2 detector
@@ -223,6 +283,12 @@ except ValueError:
     print('Invalid value for DEBUG_WINDOW_SIZE. It should be a 2-tuple: (width, height).')
     ENVS_READY = False
 
+try:
+    DEBUG_WINDOW_P_SIZE = ast.literal_eval(os.getenv('DEBUG_WINDOW_P_SIZE', '(858, 480)'))
+except ValueError:
+    print('Invalid value for DEBUG_WINDOW_SIZE. It should be a 2-tuple: (width, height).')
+    ENVS_READY = False
+
 
 if not ENVS_READY:
     raise Exception('One or more environment variables are either invalid or not set. ' +
@@ -234,3 +300,4 @@ def replace_line(file_name, line_num, text):
     out = open(file_name, 'w')
     out.writelines(lines)
     out.close()
+    

@@ -17,7 +17,9 @@ def get_bounding_boxes(frame, model):
         from detectors.tfoda import get_bounding_boxes as gbb
     elif model == 'detectron2':
         from detectors.detectron2 import get_bounding_boxes as gbb
+    elif model == 'yolo_p':
+        from detectors.yolo_p import get_bounding_boxes as gbb
     else:
-        raise Exception('Invalid detector model, algorithm or API specified (options: yolo, tfoda, detectron2, haarcascade)')
+        raise Exception('Invalid detector model, algorithm or API specified')
 
     return gbb(frame)

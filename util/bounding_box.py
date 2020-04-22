@@ -22,6 +22,10 @@ def get_area(bbox):
     _, _, w, h = bbox
     return w * h
 
+def get_position(bbox):
+    x, y, w, h = bbox
+    return y+h
+
 def get_overlap(bbox1, bbox2):
     '''
     Calculates the degree of overlap of two bounding boxes.
