@@ -1,4 +1,4 @@
-from .bounding_box import get_centroid, get_area, get_position
+from .bounding_box import get_centroid, get_area, get_position, get_bottom_point
 from distanceEstimation import distance_cal
 
 class Blob:
@@ -10,6 +10,7 @@ class Blob:
         self.type = _type
         self.type_confidence = _confidence
         self.centroid = get_centroid(_bounding_box)
+        self.bottom_point = get_bottom_point(_bounding_box)
         self.area = get_area(_bounding_box)
         self.tracker = _tracker
         self.num_consecutive_tracking_failures = 0
@@ -22,11 +23,13 @@ class Blob:
         self.speed = 0
         self.onRoad = "A"
         self.position = get_position(_bounding_box)
-        self.distance = distance_cal(self.position)
+        self.distance = 0
         self.distanceInLast3Frame = []
         self.distanceBetween3Frames = []
         self.mean_distanceInLast3Frame= 0.0
         self.remainingTime = 0.0
+        self.isJaywalker = False
+        
         
         
     def update(self, _bounding_box, _type=None, _confidence=None, _tracker=None):
@@ -36,7 +39,7 @@ class Blob:
         self.centroid = get_centroid(_bounding_box)
         self.area = get_area(_bounding_box)
         self.position = get_position(_bounding_box)
-        self.distance = distance_cal(self.position)
+        # self.distance = distance_cal(self.position)
         if _tracker:
             self.tracker = _tracker
     

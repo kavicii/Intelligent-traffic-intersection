@@ -26,12 +26,14 @@ def UpdateNearestBlobPosition(blob,blob_id, blobs_list, nearestBlobPos, nearestB
 # =============================================================================
 
 
-def distance_cal(objectPosition):
-    cameraHeight = 4.5
-    focalLength = 3.6 * (10**-3)
-    pixelLength = 4.8 * (10**-3) / 1920
-    vanishingPoint = 246
-    estimateDistance = cameraHeight * focalLength / (pixelLength*(objectPosition - vanishingPoint))
+def distance_cal(objectPosition,cameraHeight,focalLength,pixelLength,resolution,vanishingPoint):
+# =============================================================================
+#     cameraHeight = 4.5
+#     focalLength = 3.6 * (10**-3)
+#     pixelLength = 4.8 * (10**-3) / 1920
+#     vanishingPoint = 246
+# =============================================================================
+    estimateDistance = cameraHeight * focalLength / ((pixelLength/resolution[1])*(objectPosition - vanishingPoint[1]))
     return estimateDistance
 
 def normalizing_1frame_distance(x,y,nearestBlob1FrameDistance):

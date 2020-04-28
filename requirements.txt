@@ -7,3 +7,4 @@ pytest-cov==2.7.1
 pylint==2.4.4
 python-json-logger==0.1.11
 joblib==0.14.1
+shapely==1.7.0

@@ -2,6 +2,10 @@
 Bounding box utility functions.
 '''
 
+def get_bottom_point(bbox):
+    x, y, w, h = bbox
+    return (round((x + x + w) / 2), round(y+h))
+    
 def get_centroid(bbox):
     '''
     Calculates the center point of a bounding box.

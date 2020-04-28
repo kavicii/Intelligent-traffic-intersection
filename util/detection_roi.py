@@ -11,10 +11,10 @@ def get_roi_frame(current_frame, polygon):
     masked_frame = cv2.bitwise_and(current_frame, mask)
     return masked_frame
 
-def draw_roi(frame, polygon):
+def draw_roi(frame, polygon,roi_bgr):
     frame_overlay = frame.copy()
     polygon = np.array([polygon], dtype=np.int32)
-    cv2.fillPoly(frame_overlay, polygon, (0, 255, 255))
+    cv2.fillPoly(frame_overlay, polygon, roi_bgr)
     alpha = 0.2
     output_frame = cv2.addWeighted(frame_overlay, alpha, frame, 1 - alpha, 0)
     return output_frame

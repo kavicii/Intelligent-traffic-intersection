@@ -2,6 +2,7 @@
 
 import time
 import speed
+from math import sqrt
 from util.logger import get_logger
 
 
@@ -93,6 +94,27 @@ def attempt_count(blob, blob_id, counting_lines,speed_estimation_lines, counts,f
                     'counted_at':time.time(),
                 },
             })
+                            
+    return blob, counts           
+
+
+def create_waiting_zone(counting_lines,ROI):
+    x_result = []
+    y_result = []
+    zone = []
+    for counting_line in counting_lines:    
+        x, y = counting_line['line']
+        for point in ROI:
+            x_result.append(sqrt((x[0]-point[0])**2+(x[1]-point[1])**2))
+            y_result.append(sqrt((y[0]-point[0])**2+(y[1]-point[1])**2))
+        zone.append(ROI[x_result.index(min(x_result))])
+        zone.append(x)
+        zone.append(y)
+        zone.append(ROI[y_result.index(min(y_result))])
+        x_result =[]
+        y_result =[]
+    return zone
+        
     
 # =============================================================================
 #     for speed_estimation_line in speed_estimation_lines:
@@ -120,5 +142,3 @@ def attempt_count(blob, blob_id, counting_lines,speed_estimation_lines, counts,f
 #                 },
 #             })                
 # =============================================================================
-                            
-    return blob, counts

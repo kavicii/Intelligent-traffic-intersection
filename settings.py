@@ -209,7 +209,6 @@ if DETECTOR == 'yolo':
         YOLO_CLASSES_PATH = os.getenv('YOLO_CLASSES_PATH')
         YOLO_CLASSES_OF_INTEREST_PATH = os.getenv('YOLO_CLASSES_OF_INTEREST_PATH')
         YOLO_CONFIDENCE_THRESHOLD = float(os.getenv('YOLO_CONFIDENCE_THRESHOLD'))
-        print(str(YOLO_CLASSES_OF_INTEREST_PATH))
     else:
         print('YOLO_WEIGHTS_PATH, YOLO_CONFIG_PATH, YOLO_CLASSES_PATH, YOLO_CLASSES_OF_INTEREST_PATH, ' +
               'and/or YOLO_CONFIDENCE_THRESHOLD not set or invalid.')
@@ -227,7 +226,6 @@ if DETECTOR_P == 'yolo_p':
         YOLO_P_CLASSES_PATH = os.getenv('YOLO_P_CLASSES_PATH')
         YOLO_P_CLASSES_OF_INTEREST_PATH = os.getenv('YOLO_P_CLASSES_OF_INTEREST_PATH')
         YOLO_P_CONFIDENCE_THRESHOLD = float(os.getenv('YOLO_P_CONFIDENCE_THRESHOLD'))
-        print(str(YOLO_P_CLASSES_OF_INTEREST_PATH))
     else:
         print('YOLO_P_WEIGHTS_PATH, YOLO_P_CONFIG_PATH, YOLO_P_CLASSES_PATH, YOLO_P_CLASSES_OF_INTEREST_PATH, ' +
               'and/or YOLO_P_CONFIDENCE_THRESHOLD not set or invalid.')
@@ -289,6 +287,35 @@ except ValueError:
     print('Invalid value for DEBUG_WINDOW_SIZE. It should be a 2-tuple: (width, height).')
     ENVS_READY = False
 
+try:
+    CAMERA_HEIGHT = float(os.getenv('CAMERA_HEIGHT', '4.5'))
+except ValueError:
+    print('Invalid value for CAMERA_HEIGHT. It should be a positive value.')
+    ENVS_READY = False
+
+try:
+    FOCAL_LENGTH  = float(os.getenv('FOCAL_LENGTH', '0.0036'))
+except ValueError:
+    print('Invalid value for FOCAL_LENGTH. It should be a positive value.')
+    ENVS_READY = False
+
+try:
+    PIXEL_LENGTH   = float(os.getenv('PIXEL_LENGTH', '0.0048'))
+except ValueError:
+    print('Invalid value for PIXEL_LENGTH. It should be a positive value.')
+    ENVS_READY = False
+
+try:
+    RESOLUTION = ast.literal_eval(os.getenv('RESOLUTION', '(1920,1080)'))
+except ValueError:
+    print('Invalid value for RESOLUTION. It should be a 2-tuple: (x, y).')
+    ENVS_READY = False
+
+try:
+    VANISHING_POINT  = ast.literal_eval(os.getenv('VANISHING_POINT', '(600,246)'))
+except ValueError:
+    print('Invalid value for VANISHING_POINT . It should be  a 2-tuple: (x, y).')
+    ENVS_READY = False
 
 if not ENVS_READY:
     raise Exception('One or more environment variables are either invalid or not set. ' +
