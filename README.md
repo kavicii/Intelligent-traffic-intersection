@@ -12,7 +12,7 @@
 -Prompt "conda config --add channels conda-forge "
 -Prompt "conda install shapely"
 - In the project file folder, rename 'ibsp.env' into '.env'.
-- Download data files from [here](https://vtcmca-my.sharepoint.com/:u:/g/personal/180177920_stu_vtc_edu_hk/ERfm0FTlU0JKs6JlqhVC63MBrTVjeQ3u3iuIJ5FZ26j73w?e=2MlvHQ) , unzip it in "./your project folder/data".
+- Download data files from [here](https://drive.google.com/file/d/1z7xQPEyEI-zfTITVtg5yaaKCQ-XPAnj5/view?usp=sharing) , unzip it in "./your project folder/data".
 
 ## Run
 - Open your CMD, change your directory to the project file. Prompt "cd (the project file directory)".
