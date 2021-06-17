@@ -29,5 +29,8 @@ You can:
 - press key 'R' to start to setting ROI (Range of interest). Press R and then left click 4 coordinates in the debug window.
 - press key 'U' to show the UI.
 
+## User Manual
+![](https://github.com/kavicii/Intelligent-traffic-intersection/blob/master/doc/help.jpg)
+
 ## Reference
 - https://github.com/nicholaskajoh/ivy
