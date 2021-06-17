@@ -144,7 +144,7 @@ def run():
     reduce_flag = False
     help_img_flag = False
     help_img_flag_time = 0
-    help_img = cv2.imread('help.jpg')
+    help_img = cv2.imread('doc/help.jpg')
     # main loop
     while is_cam or cap.get(cv2.CAP_PROP_POS_FRAMES) + 1 < cap.get(cv2.CAP_PROP_FRAME_COUNT) or cap_P.get(cv2.CAP_PROP_POS_FRAMES) + 1 < cap_P.get(cv2.CAP_PROP_FRAME_COUNT):
         clock_timer = time.time()
