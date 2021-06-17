@@ -1,5 +1,8 @@
 # Intelligent-traffic-intersection-using-video-based-A.I.-technologies 
 
+![](Pedestrian.gif)
+![](Vehicle.gif)
+
 ## Requirements
 - Python 3.6 
 
