@@ -1,7 +1,7 @@
 # Intelligent-traffic-intersection-using-video-based-A.I.-technologies 
 
-![](Pedestrian.gif)
-![](Vehicle.gif)
+![](https://github.com/kavicii/Intelligent-traffic-intersection/blob/master/doc/Pedestrian.gif)
+![](https://github.com/kavicii/Intelligent-traffic-intersection/blob/master/doc/Vehicle.gif)
 
 ## Requirements
 - Python 3.6 
