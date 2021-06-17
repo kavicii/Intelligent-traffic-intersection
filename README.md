@@ -1,5 +1,8 @@
 # Intelligent-traffic-intersection-using-video-based-A.I.-technologies 
 
+![](https://github.com/kavicii/Intelligent-traffic-intersection/blob/master/doc/Pedestrian.gif)
+![](https://github.com/kavicii/Intelligent-traffic-intersection/blob/master/doc/Vehicle.gif)
+
 ## Requirements
 - Python 3.6 
 
@@ -25,6 +28,9 @@ You can:
 - press key 'Q' to quit the program.
 - press key 'R' to start to setting ROI (Range of interest). Press R and then left click 4 coordinates in the debug window.
 - press key 'U' to show the UI.
+
+## User Manual
+![](https://github.com/kavicii/Intelligent-traffic-intersection/blob/master/doc/help.jpg)
 
 ## Reference
 - https://github.com/nicholaskajoh/ivy
